@@ -1,0 +1,14 @@
+
+.p-input-icon-left, .p-input-icon-right {
+    float: right !important;
+}
+.p-input-icon-left > i:first-of-type {
+margin-left: 110px;
+}
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 20px !important;
+}
+.cart{
+    font-size: 20px !important;
+}

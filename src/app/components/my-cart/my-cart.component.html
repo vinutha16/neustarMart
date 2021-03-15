@@ -1,0 +1,78 @@
+<div>
+    <h1>Welcome to Shopping Mart</h1>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="cart">
+            <p-table #dt [value]="products" dataKey="id"
+            [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-customers"
+            [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [filterDelay]="0" [globalFilterFields]="['brand']">
+                <ng-template pTemplate="caption">
+                    <div class="table-header">
+                        List of Products
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <!-- <p-autoComplete [(ngModel)]="selectedBrand" [suggestions]="filteredBrands"  (completeMethod)="filterBrand($event)" field="brand" [minLength]="1"></p-autoComplete> -->
+                            <input pInputText type="text" style="z-index: 9999" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                placeholder="Global Search" />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="image_link">Image <p-sortIcon field="image_link"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="brand">Brand <p-sortIcon field="brand"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="price">Currency <p-sortIcon field="currency"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="product_type">Product Type <p-sortIcon field="product_type"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="product_type">Description <p-sortIcon field="description"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td><img [src]="product.image_link" [alt]="product.name" width="100" class="p-shadow-4" /></td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.brand}}</td>
+                        <td>{{product.price_sign}}{{product.price}}</td>
+                        <td>{{product.currency}}</td>
+                        <td>{{product.category}}</td>
+                        <td>{{product.product_type}} </td>
+                        <td>
+                            <!-- <span *ngIf="product.description.length < 35 || product.description != ''">
+                                {{product.description}}</span>
+                                *ngIf="product.description.length > 35" -->
+                            <span *ngIf="product.description">
+                                 {{product.description | slice:0:35 }} 
+                                <a href="javascript:;" data-toggle="tooltip"
+                                    data-placement="top" title="{{product.description}}"> {{product.description.length > 35 ? '...' : ''}}</a>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                    <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{products ? products.length : 0 }} products.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
